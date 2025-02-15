@@ -22,7 +22,7 @@ public class Fazenda {
     private String localizacao;
 
     @OneToOne
-    @JoinColumn(name = "produtor_id", referencedColumnName = "id")
+    @JoinColumn(name = "produtorId", referencedColumnName = "id")
     private User produtor;
 
     private Float areaCultivada;

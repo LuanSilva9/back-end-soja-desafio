@@ -20,7 +20,7 @@ public class Lote {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "fazenda_id", referencedColumnName = "id")
+    @JoinColumn(name = "fazendaId", referencedColumnName = "id")
     private Fazenda fazenda;
 
     private LocalDate dataColheita;

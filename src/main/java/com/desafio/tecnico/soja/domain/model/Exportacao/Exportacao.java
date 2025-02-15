@@ -20,7 +20,7 @@ public class Exportacao {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "lote_id", referencedColumnName = "id")
+    @JoinColumn(name = "loteId", referencedColumnName = "id")
     private Lote lote;
 
     private String paisDestino;
