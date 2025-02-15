@@ -30,6 +30,11 @@ public class FazendaService {
     }
 
     @Transactional
+    public Fazenda getFazendaByNome(String nome) throws Exception {
+        return this.fazendaRepository.findFazendaByNome(nome).orElseThrow(()-> new RuntimeException("Fazenda não encontrada"));
+    }
+
+    @Transactional
     public Fazenda createFazenda(FazendaDTO data) throws Exception {
         User produtor = this.userService.getUserById(data.produtorId());
 
