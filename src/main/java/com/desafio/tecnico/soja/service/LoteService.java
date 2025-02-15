@@ -8,6 +8,11 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class LoteService {
     @Autowired
@@ -22,6 +27,15 @@ public class LoteService {
     }
 
     @Transactional
+    public List<Lote> getLoteByFazenda(String nomeFazenda) throws Exception {
+        Fazenda fazenda = fazendaService.getFazendaByNome(nomeFazenda);
+
+        List<Lote> lotes = loteRepository.findLoteByFazenda(fazenda).orElse(Collections.emptyList());
+
+        return lotes;
+    }
+
+    @Transactional
     public Lote createLote(LoteDTO data) throws Exception {
         Fazenda fazenda = fazendaService.getFazendaById(data.fazendaId());
 
@@ -29,5 +43,6 @@ public class LoteService {
 
         return this.loteRepository.save(newLote);
     }
+
 
 }
