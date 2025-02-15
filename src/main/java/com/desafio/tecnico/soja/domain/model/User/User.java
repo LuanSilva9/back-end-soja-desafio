@@ -1,5 +1,6 @@
 package com.desafio.tecnico.soja.domain.model.User;
 
+import com.desafio.tecnico.soja.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,4 +18,9 @@ public class User {
 
     private String nome;
     private UserRole role;
+
+    public User(UserDTO data) {
+        this.nome = data.nome();
+        this.role = data.role();
+    }
 }
