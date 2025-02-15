@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface FazendaRepository extends JpaRepository<Fazenda, Long> {
     Optional<Fazenda> findFazendaById(Long id);
+    Optional<Fazenda> findFazendaByNome(String nome);
 }
