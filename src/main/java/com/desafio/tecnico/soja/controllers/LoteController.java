@@ -1,7 +1,9 @@
 package com.desafio.tecnico.soja.controllers;
 
 import com.desafio.tecnico.soja.domain.model.Lote.Lote;
+import com.desafio.tecnico.soja.domain.model.Lote.Quality;
 import com.desafio.tecnico.soja.dto.LoteDTO;
+import com.desafio.tecnico.soja.dto.LoteRastreadoDTO;
 import com.desafio.tecnico.soja.service.LoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,5 +31,15 @@ public class LoteController {
     @PostMapping("/create")
     public ResponseEntity<Lote> createLote(@RequestBody LoteDTO data) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(loteService.createLote(data));
+    }
+
+    @GetMapping("/rastrear/{id}")
+    public ResponseEntity<LoteRastreadoDTO> rastrearLote(@PathVariable(name="id") Long id) throws Exception  {
+        return ResponseEntity.ok().body(loteService.rastrear(id));
+    }
+
+    @GetMapping("/qualidade/{qualidade}")
+    public ResponseEntity<List<Lote>> getLotesByQualidade(@PathVariable(name="qualidade") Quality qualidade) {
+        return ResponseEntity.ok().body(loteService.getLotesByQualidade(qualidade));
     }
 }

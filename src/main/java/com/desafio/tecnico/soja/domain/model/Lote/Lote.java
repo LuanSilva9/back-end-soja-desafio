@@ -19,7 +19,7 @@ public class Lote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fazendaId", referencedColumnName = "id")
     private Fazenda fazenda;
 
