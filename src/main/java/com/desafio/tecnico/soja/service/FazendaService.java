@@ -46,4 +46,17 @@ public class FazendaService {
 
         return this.fazendaRepository.save(newFazenda);
     }
+
+    @Transactional
+    public String cultivar(Long id, Float qnt) throws Exception {
+        Fazenda fazenda = this.getFazendaById(id);
+
+        if(qnt == 0) {
+            throw new RuntimeException("Uma Quantidade de soja não foi passada");
+        }
+
+        fazenda.setQntSoja(fazenda.getQntSoja() + qnt);
+
+        return qnt + "kg de soja foram plantados!";
+    }
 }

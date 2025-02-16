@@ -1,6 +1,7 @@
 package com.desafio.tecnico.soja.controllers;
 
 import com.desafio.tecnico.soja.domain.model.Fazenda.Fazenda;
+import com.desafio.tecnico.soja.dto.CultivoDTO;
 import com.desafio.tecnico.soja.dto.FazendaDTO;
 import com.desafio.tecnico.soja.service.FazendaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,10 @@ public class FazendaController {
     @PostMapping("/create")
     public ResponseEntity<Fazenda> createFazenda(@RequestBody FazendaDTO data) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(fazendaService.createFazenda(data));
+    }
+
+    @PutMapping("/{id}/cultivar")
+    public ResponseEntity<String> cultivarFazenda(@PathVariable(name="id") Long id, @RequestBody CultivoDTO data) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(fazendaService.cultivar(id, data.qntCultivar()));
     }
 }

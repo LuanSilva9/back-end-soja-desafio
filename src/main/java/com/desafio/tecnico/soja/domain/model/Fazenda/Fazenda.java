@@ -21,16 +21,19 @@ public class Fazenda {
 
     private String localizacao;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "produtorId", referencedColumnName = "id")
     private User produtor;
 
     private Float areaCultivada;
+
+    private Float qntSoja;
 
     public Fazenda(FazendaDTO data, User produtor) {
         this.nome = data.nome();
         this.localizacao = data.localizacao();
         this.produtor = produtor;
         this.areaCultivada = data.areaCultivada();
+        this.qntSoja = data.qntSoja();
     }
 }
