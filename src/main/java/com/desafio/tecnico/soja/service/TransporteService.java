@@ -1,6 +1,7 @@
 package com.desafio.tecnico.soja.service;
 
 import com.desafio.tecnico.soja.domain.model.Lote.Lote;
+import com.desafio.tecnico.soja.domain.model.Lote.Quality;
 import com.desafio.tecnico.soja.domain.model.Transporte.Transporte;
 import com.desafio.tecnico.soja.domain.repository.Transporte.TransporteRepository;
 import com.desafio.tecnico.soja.dto.TransportDTO;
@@ -27,6 +28,10 @@ public class TransporteService {
     public Transporte createTransporte(TransportDTO data) throws Exception {
         Lote lote = loteService.getLoteById(data.loteId());
 
+        if(lote.getQualidade() == Quality.BAIXA) {
+            throw new RuntimeException("O lote precisa ter o selo de Qualidade pelo menos Médio, caso contrario não pode ser transportado/exportado!");
+        }
+
         Transporte newTransporte = new Transporte(data, lote);
 
         return this.transporteRepository.save(newTransporte);
@@ -39,5 +44,10 @@ public class TransporteService {
         transporte.setStatus(data.status());
 
         return transporteRepository.save(transporte);
+    }
+
+    @Transactional
+    public Transporte getTransporteByLote(Lote lote) {
+        return transporteRepository.findTransporteByLote(lote).orElse(null);
     }
 }

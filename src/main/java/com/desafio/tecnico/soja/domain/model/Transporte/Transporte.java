@@ -19,7 +19,7 @@ public class Transporte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "loteId", referencedColumnName = "id")
     private Lote lote;
 
@@ -31,7 +31,7 @@ public class Transporte {
 
     public Transporte(TransportDTO data, Lote lote) {
         this.lote = lote;
-        this.origem = data.origem();
+        this.origem = lote.getFazenda().getNome();
         this.destino = data.destino();
         this.dataSaida = data.dataSaida();
         this.dataChegada = data.dataChegada();
