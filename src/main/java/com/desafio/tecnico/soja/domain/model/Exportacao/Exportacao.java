@@ -20,20 +20,20 @@ public class Exportacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "loteId", referencedColumnName = "id")
     private Lote lote;
 
     private String paisDestino;
-    private String paisEmbarque;
+    private String portoEmbarque;
     private LocalDate dataExportacao;
     private TransportStatus status;
 
-    public Exportacao(ExportacaoDTO data, Lote lote) {
+    public Exportacao(ExportacaoDTO data, String portoEmbarque, Lote lote) {
         this.lote = lote;
         this.paisDestino = data.paisDestino();
-        this.paisEmbarque = data.paisEmbarque();
+        this.portoEmbarque = portoEmbarque;
         this.dataExportacao = data.dataExportacao();
-        this.status = data.status();
+        this.status = TransportStatus.EM_TRANSITO;
     }
 }
